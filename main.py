@@ -39,7 +39,7 @@ def read_pgm(filename,  plot=False, byteorder='>'):
 							dtype='u1' if int(maxval) < 256 else byteorder+'u2',
 							count=int(width)*int(height),
 							offset=len(header)
-							).reshape((int(height), int(width)))
+							) #.reshape((int(height), int(width)))
 	# print(image)
 	# to save image
 	if plot:
@@ -79,6 +79,10 @@ def fetch_data(filename='downgesture_train.list'):
 if __name__ == '__main__':
 	train_data, train_target = fetch_data('downgesture_train.list')
 	neuralnet = NeuralNetwork()
+	neuralnet.add_layer(size = 1, input_size = len(train_data[0]), type='input')
+	neuralnet.add_layer(size = 100)
+	neuralnet.add_layer(size = 1, type='output')
+	
 	neuralnet.fit(data = train_data, target = train_target, eta = 0.1, verbose = verbose)
 	# if needed clean data
 
